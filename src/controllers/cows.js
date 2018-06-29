@@ -10,6 +10,15 @@ function getAll(req, res, next) {
 
 function getOne(req, res, next) {
   const data = model.getOne(req.params.id)
+
+  if (result.errors) {
+    return next({
+      status: 404,
+      message: 'Could not find cow',
+      errors: result.errors
+    })
+  }
+
   res.status(200).json({
     data
   })
@@ -19,7 +28,7 @@ function create(req, res, next) {
   const result = model.create(req.body)
 
   if (result.errors) {
-  return  next({
+    return next({
       status: 400,
       message: 'Could not create new cow',
       errors: result.errors
@@ -35,7 +44,7 @@ function update(req, res, next) {
   const result = model.update(req.params.id, req.body)
 
   if (result.errors) {
-  return  next({
+    return next({
       status: 404,
       message: 'Could not find cow',
       errors: result.errors
@@ -51,7 +60,7 @@ function destroy(req, res, next) {
   const result = model.destroy(req.params.id)
 
   if (result.errors) {
-  return  next({
+    return next({
       status: 404,
       message: 'Could not find cow',
       errors: result.errors
