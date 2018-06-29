@@ -9,7 +9,7 @@ function getAll(req, res, next) {
 }
 
 function getOne(req, res, next) {
-  const data = model.getOne(req.params.id)
+  const result = model.getOne(req.params.id)
 
   if (result.errors) {
     return next({
@@ -20,7 +20,7 @@ function getOne(req, res, next) {
   }
 
   res.status(200).json({
-    data
+    result
   })
 }
 
