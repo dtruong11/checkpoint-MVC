@@ -19,14 +19,17 @@ function getAll(limit) {
 function getOne(id) {
   const errors = []
   const cow = cows.find(el => el.id === id)
+  let response
 
   if (!cow) {
     errors.push('cow is not found')
     response = {
       errors
     }
-  } else
-    return cow
+  } else {
+    response = cow
+  }
+  return response
 }
 
 function create(body) {
